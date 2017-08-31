@@ -1,0 +1,62 @@
+
+int outputpin = 0;
+int light=13;
+int check=0;
+int checker=0;
+int a=0;
+int ending=0;
+//ground pin to low, input pin to high
+void setup()
+{
+Serial.begin(9600);
+pinMode(light, OUTPUT);
+} 
+void loop()
+{
+int rawvoltage = analogRead(outputpin);
+float millivolts= (rawvoltage/1024.0) * 5000;
+float celsius= millivolts/10;
+if (checker < 3)
+{Serial.print(celsius);
+Serial.println(" degrees Celsius ");
+delay(500);
+}
+
+if (check < 1 )
+  { if (celsius < 13)
+    { 
+  digitalWrite(light, HIGH);
+  delay(31500);
+  digitalWrite(light, LOW); 
+  check=5;
+    }
+
+  }
+  if (celsius < 13)
+ { if (checker < 3)
+  {Serial.print("Please reverse the switch and enter a until piston retracts");
+  }
+  while(Serial.available()==0)
+  {
+    a= Serial.read();
+}
+
+if (checker < 3)
+{
+
+digitalWrite(light, HIGH);
+  delay(35000);
+  digitalWrite(light, LOW); 
+  checker=6;
+
+}
+if (ending < 1)
+{ Serial.print("\nTurn switch back again and re-compile to re-run program");
+ending = 6;
+}
+ }
+}
+
+
+
+
